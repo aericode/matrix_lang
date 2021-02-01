@@ -1,0 +1,39 @@
+fun Juntar(vetor[],ini, meio, fim, vetAux[]) {
+    var esq = ini;
+    var dir = meio;
+    for (var i = ini; i < fim; ++i) {
+        if((esq < meio) && ((dir >= fim) || (vetor[esq] < vetor[dir]))) {
+            vetAux[i] = vetor[esq];
+            esq++;
+        } else {
+            vetAux[i] = vetor[dir];
+            dir++;
+        }
+    }
+    for (var i = ini; i < fim; ++i) {
+        vetor[i] = vetAux[i];
+    }
+}
+
+fun MergeSort(vetor[], inicio, fim, vetorAux[]) {
+    if ((fim - inicio) < 2) return;
+    
+    var meio = ((inicio + fim)/2);
+    MergeSort(vetor, inicio, meio, vetorAux);
+    MergeSort(vetor, meio, fim, vetorAux);
+    Juntar(vetor, inicio, meio, fim, vetorAux);
+}
+
+fun MergeSort(vetor[], tamanho) {
+    var vetorAux[tamanho];
+    MergeSort(vetor, 0, tamanho,);
+}
+
+fun main() {
+    var arr = [1, 5, 2, 3, 4];
+	var aux[5];
+    var n = 5;
+    mergeSort(arr, arr[0],arr[3],arr[5], 0, n-1);
+    printArray(arr, n);
+    return 0;
+}

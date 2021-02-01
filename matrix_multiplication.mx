@@ -1,0 +1,13 @@
+fun main(){
+    var a, b;
+    var mult;
+
+    a = [[1,2],[3,4]];
+    load(b, "./matrix2.csv");
+
+    mult = a * b;
+    print "Resultado da multiplicação\n";
+    print mult;
+
+    return 0;
+}

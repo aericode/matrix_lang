@@ -20,7 +20,7 @@ STRING     \".*\"
 {BOOLEAN}           { printf( "%d %d BOOLEAN: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 {STRING}            { printf( "%d %d STRING: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 
-if         { printf( "%d %d MAIN: %s\n", yylineno, offset, yytext); offset += yyleng; }
+if         { printf( "%d %d IF: %s\n", yylineno, offset, yytext); offset += yyleng; }
 for        { printf( "%d %d FOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
 do         { printf( "%d %d DO: %s\n", yylineno, offset, yytext); offset += yyleng; }
 while      { printf( "%d %d WHILE: %s\n", yylineno, offset, yytext); offset += yyleng; }
@@ -41,30 +41,43 @@ transposed { printf( "%d %d TRANSPOSED: %s\n", yylineno, offset, yytext); offset
 ")"    { printf( "%d %d CLOSING_PARENTHESIS: %s\n", yylineno, offset, yytext); offset += yyleng; }
 
 "{"    { printf( "%d %d OPENING_BRACES: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"}"    { printf( "%d %d CLOSING_BRACES: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"TEGER: 0}"    { printf( "%d %d CLOSING_BRACES: %s\n", yylineno, offset, yytext); offset += yyleng; }
 
 "["    { printf( "%d %d OPENING_SQUARE_BRACKET: %s\n", yylineno, offset, yytext); offset += yyleng; }
 "]"    { printf( "%d %d CLOSING_SQUARE_BRACKET: %s\n", yylineno, offset, yytext); offset += yyleng; }
 
+"=="   { printf( "%d %d EQUAL_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"!="   { printf( "%d %d DIFERENT_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"<="   { printf( "%d %d LEQ_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"<"    { printf( "%d %d LESS_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+">="   { printf( "%d %d REQ_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+">"    { printf( "%d %d GREATER_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+
 "="    { printf( "%d %d ASSIGN_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
 "+="   { printf( "%d %d ASSING_PLUS_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
 "-="   { printf( "%d %d ASSING_MINUS_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"/="   { printf( "%d %d ASSING_DIVISION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"*="   { printf( "%d %d ASSING_MULTIPLICATION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
 
-"+"    { printf( "%d %d ADDITION: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"-"    { printf( "%d %d SUBTRACTION: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"*"    { printf( "%d %d MULTIPLICATION: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"/"    { printf( "%d %d DIVISION: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"%"    { printf( "%d %d MODULUS: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"++"   { printf( "%d %d UNARY_ADDITION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"--"   { printf( "%d %d UNARY_SUBTRACTION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
 
+"+"    { printf( "%d %d ADDITION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"-"    { printf( "%d %d SUBTRACTION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"*"    { printf( "%d %d MULTIPLICATION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"/"    { printf( "%d %d DIVISION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"%"    { printf( "%d %d MODULUS_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+
+","    { printf( "%d %d COLON: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 ";"    { printf( "%d %d SEMICOLON: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 
-[\n]+  offset = 1;
+\n       { offset = 1; }
 
-"//".*             /* one-line comments */
+"//".*   /* one-line comments */
 
-[ \t\n]+          /* whitespace */
+[ \t]+  { offset += yyleng; }
 
-.      { printf( "%d %d Unrecognized character: %s\n", yylineno, offset, yytext ); offset += yyleng; }
+.       { printf( "%d %d Unrecognized character: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 
 %%
 
@@ -73,10 +86,11 @@ int argc;
 char **argv;
 {
     ++argv, --argc;  /* skip over program name */
-    if ( argc > 0 )
-            yyin = fopen( argv[0], "r" );
-    else
-            yyin = stdin;
+    if ( argc > 0 ) {
+        yyin = fopen( argv[0], "r" );
+    } else {
+        yyin = stdin;
+    }
 
     yylex();
 }
