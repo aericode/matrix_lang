@@ -7,7 +7,7 @@ int offset = 1;
 %option yylineno
 
 DIGIT    [0-9]
-ID       [a-zA-Z][a-zA-Z0-9]*
+ID       [a-zA-Z][a-zA-Z0-9\_]*
 
 %%
 
@@ -15,14 +15,21 @@ ID       [a-zA-Z][a-zA-Z0-9]*
 
 {DIGIT}+"."{DIGIT}* { printf( "%d %d FLOAT: %f\n", yylineno, offset, atof( yytext )); offset += yyleng; }
 
-if     { printf( "%d %d MAIN: %s\n", yylineno, offset, yytext); offset += yyleng; }
-for    { printf( "%d %d FOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-do     { printf( "%d %d DO: %s\n", yylineno, offset, yytext); offset += yyleng; }
-while  { printf( "%d %d WHILE: %s\n", yylineno, offset, yytext); offset += yyleng; }
-return { printf( "%d %d RETURN: %s\n", yylineno, offset, yytext); offset += yyleng; }
-goto   { printf( "%d %d GOTO: %s\n", yylineno, offset, yytext); offset += yyleng;  }
-fun    { printf( "%d %d FUN: %s\n", yylineno, offset, yytext); offset += yyleng; }
-main   { printf( "%d %d MAIN: %s\n", yylineno, offset, yytext); offset += yyleng; }
+if         { printf( "%d %d MAIN: %s\n", yylineno, offset, yytext); offset += yyleng; }
+for        { printf( "%d %d FOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+do         { printf( "%d %d DO: %s\n", yylineno, offset, yytext); offset += yyleng; }
+while      { printf( "%d %d WHILE: %s\n", yylineno, offset, yytext); offset += yyleng; }
+return     { printf( "%d %d RETURN: %s\n", yylineno, offset, yytext); offset += yyleng; }
+goto       { printf( "%d %d GOTO: %s\n", yylineno, offset, yytext); offset += yyleng;  }
+fun        { printf( "%d %d FUN: %s\n", yylineno, offset, yytext); offset += yyleng; }
+main       { printf( "%d %d MAIN: %s\n", yylineno, offset, yytext); offset += yyleng; }
+print      { printf( "%d %d PRINT: %s\n", yylineno, offset, yytext); offset += yyleng; }
+read       { printf( "%d %d READ: %s\n", yylineno, offset, yytext); offset += yyleng; }
+load       { printf( "%d %d LOAD: %s\n", yylineno, offset, yytext); offset += yyleng; }
+zero       { printf( "%d %d IDENTITY: %s\n", yylineno, offset, yytext); offset += yyleng; }
+identity   { printf( "%d %d IDENTITY: %s\n", yylineno, offset, yytext); offset += yyleng; }
+inverse    { printf( "%d %d INVERSE: %s\n", yylineno, offset, yytext); offset += yyleng; }
+transposed { printf( "%d %d TRANSPOSED: %s\n", yylineno, offset, yytext); offset += yyleng; }
 
 {ID}   { printf( "%d %d ID: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 
@@ -49,11 +56,11 @@ main   { printf( "%d %d MAIN: %s\n", yylineno, offset, yytext); offset += yyleng
 
 [\n]+  offset = 1;
 
-"{"[^}\n]*"}"     /* one-line comments */
+"//".*             /* one-line comments */
 
 [ \t\n]+          /* whitespace */
 
-.           printf( "Unrecognized character: %s\n", yytext );
+.      { printf( "%d %d Unrecognized character: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 
 %%
 

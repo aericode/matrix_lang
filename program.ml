@@ -1,3 +1,4 @@
 fun main() {
-  var a = 1.5 + 5;
+  // comentário qualquer
+  var a_b = 1.5 + 5;
 }
