@@ -41,7 +41,7 @@ transposed { printf( "%d %d TRANSPOSED: %s\n", yylineno, offset, yytext); offset
 ")"    { printf( "%d %d CLOSING_PARENTHESIS: %s\n", yylineno, offset, yytext); offset += yyleng; }
 
 "{"    { printf( "%d %d OPENING_BRACES: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"TEGER: 0}"    { printf( "%d %d CLOSING_BRACES: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"}"    { printf( "%d %d CLOSING_BRACES: %s\n", yylineno, offset, yytext); offset += yyleng; }
 
 "["    { printf( "%d %d OPENING_SQUARE_BRACKET: %s\n", yylineno, offset, yytext); offset += yyleng; }
 "]"    { printf( "%d %d CLOSING_SQUARE_BRACKET: %s\n", yylineno, offset, yytext); offset += yyleng; }
@@ -77,7 +77,7 @@ transposed { printf( "%d %d TRANSPOSED: %s\n", yylineno, offset, yytext); offset
 
 [ \t]+  { offset += yyleng; }
 
-.       { printf( "%d %d Unrecognized character: %s\n", yylineno, offset, yytext ); offset += yyleng; }
+.       { printf( "%d %d Lexical error: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 
 %%
 
