@@ -21,10 +21,12 @@ STRING     \".*\"
 {STRING}            { printf( "%d %d STRING: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 
 if         { printf( "%d %d IF: %s\n", yylineno, offset, yytext); offset += yyleng; }
+else       { printf( "%d %d ELSE: %s\n", yylineno, offset, yytext); offset += yyleng; }
 for        { printf( "%d %d FOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
 do         { printf( "%d %d DO: %s\n", yylineno, offset, yytext); offset += yyleng; }
 while      { printf( "%d %d WHILE: %s\n", yylineno, offset, yytext); offset += yyleng; }
 return     { printf( "%d %d RETURN: %s\n", yylineno, offset, yytext); offset += yyleng; }
+struct     { printf( "%d %d STRUCT: %s\n", yylineno, offset, yytext); offset += yyleng; }
 fun        { printf( "%d %d FUN: %s\n", yylineno, offset, yytext); offset += yyleng; }
 main       { printf( "%d %d MAIN: %s\n", yylineno, offset, yytext); offset += yyleng; }
 print      { printf( "%d %d PRINT: %s\n", yylineno, offset, yytext); offset += yyleng; }
@@ -71,7 +73,7 @@ transposed { printf( "%d %d TRANSPOSED: %s\n", yylineno, offset, yytext); offset
 ","    { printf( "%d %d COLON: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 ";"    { printf( "%d %d SEMICOLON: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 
-\n       { offset = 1; }
+\n      { offset = 1; }
 
 "//".*   /* one-line comments */
 

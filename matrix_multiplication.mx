@@ -1,6 +1,6 @@
 fun main(){
     var a, b;
-    var mult;
+    var mult@;
 
     a = [[1,2],[3,4]];
     load(b, "./matrix2.csv");
