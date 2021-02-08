@@ -8,7 +8,7 @@
 
 Onde program.mx é o código-fonte do programa que será analisado.
 
-### Exemplos
+### Exemplos de código
 mergesort.mx<br/>
 quicksort.mx<br/>
 matrix_multiplication.mx<br/>
