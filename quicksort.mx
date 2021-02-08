@@ -3,35 +3,33 @@ fun swap(a, b){
     a = b;
     b = t;
 }
-  
-fun partition (arr[], low, high){
-    var pivot = arr[high];
+
+fun partition (array, low, high){
+    var pivot = array[high];
     var i = (low - 1);
-  
-    for (var j = low; j <= high- 1; j++){
-        if (arr[j] < pivot)
-        {
+
+    for (var j = low; j <= high - 1; j++){
+        if (array[j] < pivot) {
             i++;
-            swap(arr[i], arr[j]);
+            swap(array[i], array[j]);
         }
     }
-    swap(arr[i + 1], arr[high]);
+    swap(array[i + 1], array[high]);
     return (i + 1);
 }
- 
-fun quickSort(arr[], low, high){
+
+fun quickSort(array, low, high){
     if (low < high){
-        var pi = partition(arr, low, high);
-  
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+        var pi = partition(array, low, high);
+        quickSort(array, low, pi - 1);
+        quickSort(array, pi + 1, high);
     }
 }
 
 fun main(){
-    var arr = [1, 5, 2, 3, 4];
-    var n = 5;
-    quickSort(arr, 0, n-1);
-    print(arr);
+    var array = [1, 5, 2, 3, 4];
+    var size = 5;
+    quickSort(array, 0, size - 1);
+    print(array);
     return 0;
 }

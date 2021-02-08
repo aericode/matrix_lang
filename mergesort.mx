@@ -1,39 +1,63 @@
-fun Juntar(vetor[],ini, meio, fim, vetAux[]) {
-    var esq = ini;
-    var dir = meio;
-    for (var i = ini; i < fim; ++i) {
-        if((esq < meio) && ((dir >= fim) || (vetor[esq] < vetor[dir]))) {
-            vetAux[i] = vetor[esq];
-            esq++;
+fun merge(array, left, middle, right) {
+    var i, j, k;
+    var n1 = middle - left + 1;
+    var n2 = right - middle;
+ 
+    var tempLeft[n1], tempRight[n2];
+ 
+    for (i = 0; i < n1; i++) {
+        tempLeft[i] = array[left + i];
+    }
+
+    for (j = 0; j < n2; j++) {
+        tempRight[j] = array[middle + 1 + j];
+    }
+ 
+    i = 0;
+    j = 0;
+    k = left;
+
+    while (i < n1 && j < n2) {
+        if (tempLeft[i] <= tempRight[j]) {
+            array[k] = tempLeft[i];
+            i++;
         } else {
-            vetAux[i] = vetor[dir];
-            dir++;
+            array[k] = tempRight[j];
+            j++;
         }
+        k++;
     }
-    for (var i = ini; i < fim; ++i) {
-        vetor[i] = vetAux[i];
+
+    while (i < n1) {
+        array[k] = tempLeft[i];
+        i++;
+        k++;
+    }
+ 
+    while (j < n2) {
+        array[k] = tempRight[j];
+        j++;
+        k++;
     }
 }
+ 
+fun mergeSort(array, left, right) {
+    if (left < right) {
+        var middle = left + (right - left) / 2;
 
-fun MergeSort(vetor[], inicio, fim, vetorAux[]) {
-    if ((fim - inicio) < 2) return;
-    
-    var meio = ((inicio + fim)/2);
-    MergeSort(vetor, inicio, meio, vetorAux);
-    MergeSort(vetor, meio, fim, vetorAux);
-    Juntar(vetor, inicio, meio, fim, vetorAux);
+        mergeSort(array, left, middle);
+        mergeSort(array, middle + 1, right);
+ 
+        merge(array, left, middle, right);
+    }
 }
-
-fun MergeSort(vetor[], tamanho) {
-    var vetorAux[tamanho];
-    MergeSort(vetor, 0, tamanho,);
-}
-
+ 
 fun main() {
-    var arr = [1, 5, 2, 3, 4];
-	var aux[5];
-    var n = 5;
-    mergeSort(arr, arr[0],arr[3],arr[5], 0, n-1);
-    printArray(arr, n);
+    var array = [1, 2, 14, 7, 20, 12];
+    var size = 6;
+ 
+    mergeSort(array, 0, size - 1);
+    print(array);
+
     return 0;
 }
