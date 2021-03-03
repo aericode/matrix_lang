@@ -24,7 +24,7 @@ Block -> { Statements } .
 Return_expr ->   return ( Expression ) ; .
 For_block -> for Ffor .
 Ffor ->  ( F1 .
-F1 ->    var id_token ; Expression ; Assignment ) Block |   \epsilon ; Expression ; Assignment ) Block .
+F1 ->    Assignment ; Expression ; Assignment ) Block |   \epsilon ; Expression ; Assignment ) Block .
 If_block ->  if ( Expression ) Block .
 While_block ->   while ( Expression ) Block .
 ARGUMENTS -> Expression FExpression .
