@@ -1,6 +1,6 @@
 Program ->   Definition * .
 Definition ->    Struct |   Statements |   Function .
-Struct ->    struct id_token { Instantiations } .
+Struct ->    struct id_token chavesE Instantiations ChavesD .
 Instantiations -> Instantiation FInstantiation .
 FInstantiation -> ; F2 .
 F2 -> Instantiations | \epsilon.
@@ -10,17 +10,17 @@ Assign1 ->   Assignment |   Instantiation .
 Function ->  fun id_token ( Function1 ) Block .
 Function1 -> Function_argument |   \epsilon .
 Function_argument -> id_token Fid_token .
-Fid_token -> \epsilon |   , Function_argument .
+Fid_token -> \epsilon |   virg Function_argument .
 Statements -> Statement Statements | \epsilon .
 Statement -> If_block | For_block |   While_block |   Assign |   Return_expr |   Print |   Read .
 Assignment ->    id_token Fid_token1 .
-Fid_token1 ->    = Fassign |   -= Fsubassign |   += Fsubassign |   *= Fsubassign |   /= Expression |   ++ |   -- | ( ARGUMENTS ) ; .
+Fid_token1 ->    assign Fassign |   minusassign Fsubassign |   plusassign Fsubassign |   multiassign Fsubassign |   divassign Expression |   plusplus |   minusminus | ( ARGUMENTS ) ; .
 Fassign ->   Expression |   Matrix_line .
-Matrix_line ->   { ELEMENTS } .
+Matrix_line ->   chavesE ELEMENTS ChavesD .
 ELEMENTS ->  ELEMENT FELEMENT .
-FELEMENT ->  \epsilon |   , ELEMENTS .
+FELEMENT ->  \epsilon |   virg ELEMENTS .
 ELEMENT ->   Expression |   Matrix_line .
-Block -> { Statements } .
+Block -> chavesE Statements ChavesD .
 Return_expr ->   return ( Expression ) ; .
 For_block -> for Ffor .
 Ffor ->  ( F1 .
@@ -28,40 +28,40 @@ F1 ->    Assignment ; Expression ; Assignment ) Block |   \epsilon ; Expression 
 If_block ->  if ( Expression ) Block .
 While_block ->   while ( Expression ) Block .
 ARGUMENTS -> Expression FExpression .
-FExpression -> \epsilon |   , ARGUMENTS .
-Matrix ->    [ Expression ] Dim | \epsilon.
-Dim ->   [ Expression ] |   \epsilon .
+FExpression -> \epsilon |   virg ARGUMENTS .
+Matrix ->    chavesE Expression chavesD Dim | \epsilon.
+Dim ->   chavesE Expression chavesD |   \epsilon .
 Print -> print ( Expression ) ; .
 Read ->  read ( id_token ) ; .
 Expression ->    TLog Expression1 .
 Expression1 ->   or TLog Expression1 | \epsilon    .
 TLog ->  FLog TLog1 .
 TLog1 -> and FLog TLog1 | \epsilon    .
-FLog ->  ~ ERel |   ERel .
+FLog ->  neg ERel |   ERel .
 ERel ->  LRel FLRel .
-FLRel -> == LRel | \epsilon    .
+FLRel -> equalequal LRel | \epsilon    .
 LRel ->  LERel FLERel .
-FLERel ->    < LERel | \epsilon    .
+FLERel ->    less LERel | \epsilon    .
 LERel -> GRel FGRel .
 FGRel -> \leq GRel | \epsilon    .
 GRel ->  GERel FGERel .
-FGERel ->    > GERel | \epsilon    .
+FGERel ->    greather GERel | \epsilon    .
 GERel -> DRel FDRel .
 FDRel -> \geq DRel | \epsilon    .
 DRel ->  AOp FAOp .
 FAOp ->  \neq AOp | \epsilon    .
 AOp ->   SOp AOp1 .
-AOp1 ->  + SOp AOp1 | \epsilon    .
+AOp1 ->  plus SOp AOp1 | \epsilon    .
 SOp ->   MOp SOp1 .
-SOp1 ->  - MOp SOp1 | \epsilon    .
+SOp1 ->  minus MOp SOp1 | \epsilon    .
 MOp ->   DOp MOp1 .
 MOp1 ->  mult DOp MOp1 | \epsilon    .
 DOp ->   EOp DOp1 .
-DOp1 ->  / EOp DOp1 | \epsilon    .
+DOp1 ->  div EOp DOp1 | \epsilon    .
 EOp ->   MeUn FMeUn .
-FMeUn -> ^ EOp | \epsilon    .
-MeUn ->  - MaUn |   MaUn .
-MaUn ->  + Zer |   Zer .
+FMeUn -> exp EOp | \epsilon    .
+MeUn ->  minus MaUn |   MaUn .
+MaUn ->  plus Zer |   Zer .
 Zer ->   zero( Id ) |   Id .
 Id ->    identity( Inv ) |   Inv .
 Inv ->   inverse( Tra ) |   Tra .
