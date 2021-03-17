@@ -1,5 +1,6 @@
 %{
 #include <math.h>
+#include "tokens.h"
 
 int offset = 1;
 %}
@@ -14,66 +15,71 @@ STRING     \".*\"
 
 %%
 
-{DIGIT}+            { printf( "%d %d INTEGER: %d\n", yylineno, offset, atoi( yytext )); offset += yyleng; }
-{DIGIT}+"."{DIGIT}* { printf( "%d %d FLOAT: %f\n", yylineno, offset, atof( yytext )); offset += yyleng; }
-{CHARACTER}         { printf( "%d %d CHARACTER: %s\n", yylineno, offset, yytext ); offset += yyleng; }
-{BOOLEAN}           { printf( "%d %d BOOLEAN: %s\n", yylineno, offset, yytext ); offset += yyleng; }
-{STRING}            { printf( "%d %d STRING: %s\n", yylineno, offset, yytext ); offset += yyleng; }
+{DIGIT}+            { offset += yyleng; return INT; }
+{DIGIT}+"."{DIGIT}* { offset += yyleng; return FLO; }
+{CHARACTER}         { offset += yyleng; return CHA; }
+{BOOLEAN}           { offset += yyleng; return BOO; }
+{STRING}            { offset += yyleng; return STR; }
 
-if         { printf( "%d %d IF: %s\n", yylineno, offset, yytext); offset += yyleng; }
-else       { printf( "%d %d ELSE: %s\n", yylineno, offset, yytext); offset += yyleng; }
-for        { printf( "%d %d FOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-do         { printf( "%d %d DO: %s\n", yylineno, offset, yytext); offset += yyleng; }
-while      { printf( "%d %d WHILE: %s\n", yylineno, offset, yytext); offset += yyleng; }
-return     { printf( "%d %d RETURN: %s\n", yylineno, offset, yytext); offset += yyleng; }
-struct     { printf( "%d %d STRUCT: %s\n", yylineno, offset, yytext); offset += yyleng; }
-fun        { printf( "%d %d FUN: %s\n", yylineno, offset, yytext); offset += yyleng; }
-main       { printf( "%d %d MAIN: %s\n", yylineno, offset, yytext); offset += yyleng; }
-print      { printf( "%d %d PRINT: %s\n", yylineno, offset, yytext); offset += yyleng; }
-read       { printf( "%d %d READ: %s\n", yylineno, offset, yytext); offset += yyleng; }
-load       { printf( "%d %d LOAD: %s\n", yylineno, offset, yytext); offset += yyleng; }
-zero       { printf( "%d %d ZERO: %s\n", yylineno, offset, yytext); offset += yyleng; }
-identity   { printf( "%d %d IDENTITY: %s\n", yylineno, offset, yytext); offset += yyleng; }
-inverse    { printf( "%d %d INVERSE: %s\n", yylineno, offset, yytext); offset += yyleng; }
-transposed { printf( "%d %d TRANSPOSED: %s\n", yylineno, offset, yytext); offset += yyleng; }
+var        { offset += yyleng; return VAR; }
+if         { offset += yyleng; return IF; }
+else       { offset += yyleng; return ELS; }
+for        { offset += yyleng; return FOR; }
+do         { offset += yyleng; return DO; }
+while      { offset += yyleng; return WHI; }
+return     { offset += yyleng; return RET; }
+struct     { offset += yyleng; return STU; }
+fun        { offset += yyleng; return FUN; }
+main       { offset += yyleng; return MAI; }
+print      { offset += yyleng; return PRI; }
+read       { offset += yyleng; return REA; }
+load       { offset += yyleng; return LOA; }
+zero       { offset += yyleng; return ZER; }
+identity   { offset += yyleng; return IDE; }
+inverse    { offset += yyleng; return INV; }
+transposed { offset += yyleng; return TRA; }
 
-{ID}   { printf( "%d %d ID: %s\n", yylineno, offset, yytext ); offset += yyleng; }
+{ID}   { offset += yyleng; return ID; }
 
-"("    { printf( "%d %d OPENING_PARENTHESIS: %s\n", yylineno, offset, yytext); offset += yyleng; }
-")"    { printf( "%d %d CLOSING_PARENTHESIS: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"("    { offset += yyleng; return '('; }
+")"    { offset += yyleng; return ')'; }
 
-"{"    { printf( "%d %d OPENING_BRACES: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"}"    { printf( "%d %d CLOSING_BRACES: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"{"    { offset += yyleng; return '{'; }
+"}"    { offset += yyleng; return '}'; }
 
-"["    { printf( "%d %d OPENING_SQUARE_BRACKET: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"]"    { printf( "%d %d CLOSING_SQUARE_BRACKET: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"["    { offset += yyleng; return '['; }
+"]"    { offset += yyleng; return ']'; }
 
-"=="   { printf( "%d %d EQUAL_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"!="   { printf( "%d %d DIFERENT_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"<="   { printf( "%d %d LEQ_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"<"    { printf( "%d %d LESS_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-">="   { printf( "%d %d REQ_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-">"    { printf( "%d %d GREATER_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"=="   { offset += yyleng; return EQU; }
+"!="   { offset += yyleng; return DIO; }
+"<="   { offset += yyleng; return LEQ; }
+"<"    { offset += yyleng; return LEO; }
+">="   { offset += yyleng; return GEQ; }
+">"    { offset += yyleng; return GRE; }
 
-"="    { printf( "%d %d ASSIGN_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"+="   { printf( "%d %d ASSING_PLUS_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"-="   { printf( "%d %d ASSING_MINUS_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"/="   { printf( "%d %d ASSING_DIVISION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"*="   { printf( "%d %d ASSING_MULTIPLICATION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"="    { offset += yyleng; return '='; }
+"+="   { offset += yyleng; return APL; }
+"-="   { offset += yyleng; return AMI; }
+"/="   { offset += yyleng; return ADI; }
+"*="   { offset += yyleng; return AMU; }
 
-"++"   { printf( "%d %d UNARY_ADDITION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"--"   { printf( "%d %d UNARY_SUBTRACTION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"++"   { offset += yyleng; return UAD; }
+"--"   { offset += yyleng; return USU; }
 
-"+"    { printf( "%d %d ADDITION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"-"    { printf( "%d %d SUBTRACTION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"*"    { printf( "%d %d MULTIPLICATION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"/"    { printf( "%d %d DIVISION_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
-"%"    { printf( "%d %d MODULUS_OPERATOR: %s\n", yylineno, offset, yytext); offset += yyleng; }
+"&"    { offset += yyleng; return '&'; }
+"!"    { offset += yyleng; return '!'; }
+"||"    { offset += yyleng; return OR; }
 
-","    { printf( "%d %d COLON: %s\n", yylineno, offset, yytext ); offset += yyleng; }
-";"    { printf( "%d %d SEMICOLON: %s\n", yylineno, offset, yytext ); offset += yyleng; }
+"+"    { offset += yyleng; return '+'; }
+"-"    { offset += yyleng; return '-'; }
+"*"    { offset += yyleng; return '*'; }
+"/"    { offset += yyleng; return '/'; }
+"%"    { offset += yyleng; return '%'; }
 
-\n      { offset = 1; }
+","    { offset += yyleng; return ','; }
+";"    { offset += yyleng; return ';'; }
+
+\n      { offset = 1; return EOL; }
 
 "//".*   /* one-line comments */
 
@@ -82,17 +88,3 @@ transposed { printf( "%d %d TRANSPOSED: %s\n", yylineno, offset, yytext); offset
 .       { printf( "%d %d Lexical error: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 
 %%
-
-int main( argc, argv )
-int argc;
-char **argv;
-{
-    ++argv, --argc;  /* skip over program name */
-    if ( argc > 0 ) {
-        yyin = fopen( argv[0], "r" );
-    } else {
-        yyin = stdin;
-    }
-
-    yylex();
-}
