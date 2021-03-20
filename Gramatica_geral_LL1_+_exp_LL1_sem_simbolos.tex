@@ -1,11 +1,8 @@
 Program ->   Definition Definitions .
 Definitions -> Definition Definitions | .
-Definition ->    Struct |   Instantiation |   Function .
+Definition ->    Struct |   Instantiation ; |   Function .
 Struct ->    struct id_token chavesE Instantiations ChavesD .
-Instantiations -> Instantiation FInstantiation .
-FInstantiation -> ; F2 .
-F2 -> Instantiations |  .
-Instantiation -> var id_token Matrix .
+Instantiation ->	var id_token Matrix .
 Assign ->    Assign1 ; .
 Assign1 ->   Assignment |   Instantiation .
 Function ->  fun id_token ( Function1 ) Block .

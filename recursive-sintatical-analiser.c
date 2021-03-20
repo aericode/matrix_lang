@@ -17,34 +17,32 @@ void Matrix() {
 
 }
 
-void Instanciation() {
-    eat(VAR); eat(ID); Matrix();
-}
-
-void Instanciations() {
-    Instanciation(); FInstanciation();
-}
-
-void Definition() {
+void Instantiation() {
     switch(tok) {
-        case STU: eat(STU); eat(ID); eat("{"); Instantiations(); eat("}"); Definition(); break;
-        case FUN: eat(FUN); eat(ID); eat("("); Function1(); eat(")"); Block(); Definition(); break;
-        case VAR: eat(VAR); eat(ID); eat(";"); Definition(); break;
+        case VAR: eat(VAR); eat(ID); Matrix(); eat(";"); break;
+        default: error();
+    }
+}
+
+void Instantiations() {
+    switch(tok) {
+        case VAR: eat(VAR); eat(ID); eat(";"); break;
+        default: error();
     }
 }
 
 void Definitions() {
     switch(tok) {
-        case STU: eat(STU); eat(ID); eat("{"); Instantiations(); eat("}"); Definition(); Definitions(); break;
-        case FUN: eat(FUN); eat(ID); eat("("); Function1(); eat(")"); Block(); Definition(); Definitions(); break;
-        case VAR: eat(VAR); eat(ID); eat(";"); Definition(); Definitions(); break;
+        case STU: eat(STU); eat(ID); eat("{"); Instantiations(); eat("}"); Definitions(); break;
+        case FUN: eat(FUN); eat(ID); eat("("); Function1(); eat(")"); Block(); Definitions(); break;
+        case VAR: eat(VAR); eat(ID); eat(";"); Definitions(); break;
         case EOF: eat(EOF); break;
     }
 }
 
 void Program() {
     switch(tok) {
-        case STU: eat(STU); eat(ID); eat("{"); Instantiations(); eat("}"); Definition(); Definitions(); break;
+        case STU: eat(STU); eat(ID); eat("{"); Instantiations(); eat("}"); Definitions(); break;
         case FUN: eat(FUN); eat(ID); eat("("); Function1(); eat(")"); Block(); Definitions(); break;
         case VAR: eat(VAR); eat(ID); eat(";"); Definitions(); break;
     }
