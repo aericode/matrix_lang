@@ -1,0 +1,48 @@
+var teste1; 
+var teste2[1][2]; 
+struct matrix {
+    var linha;
+    var coluna;
+}
+var teste3;
+
+fun teste(t1, t2){
+	return (3);
+}
+
+fun main(){
+    read (teste1); 
+    print(teste1);
+
+    teste(t1, t2);
+
+    teste1 = 0;
+
+    var i;
+    i = 0;
+
+    if(0){
+        read (teste1); 
+        print(teste1);
+
+        teste1 = 0;
+    }
+
+    while(0){
+        read (teste1); 
+        print(teste1);
+
+        teste1 = 0;
+    }
+
+    for (teste1 = 0; 0; teste1++)
+    {
+        read (teste1); 
+        print(teste1);
+
+        teste1 = 0;
+    }
+    teste1--;
+
+    return (0);
+}

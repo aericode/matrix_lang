@@ -1,9 +1,12 @@
 %{
 #include <math.h>
 #include "tokens.h"
+#define YY_DECL extern "C" int yylex()
+FILE *out ;
 
 int offset = 1;
 %}
+
 
 %option yylineno
 
@@ -30,7 +33,7 @@ while      { offset += yyleng; return WHI; }
 return     { offset += yyleng; return RET; }
 struct     { offset += yyleng; return STU; }
 fun        { offset += yyleng; return FUN; }
-main       { offset += yyleng; return MAI; }
+
 print      { offset += yyleng; return PRI; }
 read       { offset += yyleng; return REA; }
 load       { offset += yyleng; return LOA; }
@@ -84,6 +87,8 @@ transposed { offset += yyleng; return TRA; }
 "//".*   /* one-line comments */
 
 [ \t]+  { offset += yyleng; }
+
+<<EOF>> { offset += yyleng; return EOFF; }
 
 .       { printf( "%d %d Lexical error: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 

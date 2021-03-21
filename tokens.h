@@ -12,7 +12,7 @@ enum token {
     RET = 268,
     STU = 269,
     FUN = 270,
-    MAI = 271,
+//    MAI = 271,
     PRI = 272,
     REA = 273,
     LOA = 274,
@@ -36,5 +36,5 @@ enum token {
     OR = 292,
     VAR = 293,
     EOL = 294,
-    EOF = 295
+    EOFF = 295
 };
