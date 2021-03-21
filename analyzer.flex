@@ -78,6 +78,7 @@ transposed { offset += yyleng; return TRA; }
 "*"    { offset += yyleng; return '*'; }
 "/"    { offset += yyleng; return '/'; }
 "%"    { offset += yyleng; return '%'; }
+"^"    { offset += yyleng; return '^'; }
 
 ","    { offset += yyleng; return ','; }
 ";"    { offset += yyleng; return ';'; }
