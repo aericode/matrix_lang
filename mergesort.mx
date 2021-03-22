@@ -1,9 +1,14 @@
 fun merge(array, left, middle, right) {
-    var i, j, k;
-    var n1 = middle - left + 1;
-    var n2 = right - middle;
+    var i;
+    var j;
+    var k;
+    var n1;
+    n1 = middle - left + 1;
+    var n2;
+    n2 = right - middle;
  
-    var tempLeft[n1], tempRight[n2];
+    var tempLeft[n1];
+    var tempRight[n2];
  
     for (i = 0; i < n1; i++) {
         tempLeft[i] = array[left + i];
@@ -17,7 +22,7 @@ fun merge(array, left, middle, right) {
     j = 0;
     k = left;
 
-    while (i < n1 && j < n2) {
+    while (i < n1 & j < n2) {
         if (tempLeft[i] <= tempRight[j]) {
             array[k] = tempLeft[i];
             i++;
@@ -43,7 +48,8 @@ fun merge(array, left, middle, right) {
  
 fun mergeSort(array, left, right) {
     if (left < right) {
-        var middle = left + (right - left) / 2;
+        var middle;
+        middle = left + (right - left) / 2;
 
         mergeSort(array, left, middle);
         mergeSort(array, middle + 1, right);
@@ -53,11 +59,13 @@ fun mergeSort(array, left, right) {
 }
  
 fun main() {
-    var array = [1, 2, 14, 7, 20, 12];
-    var size = 6;
+    var array;
+    array = [1, 2, 14, 7, 20, 12];
+    var size;
+    array = 6;
  
     mergeSort(array, 0, size - 1);
     print(array);
 
-    return 0;
+    return (0);
 }

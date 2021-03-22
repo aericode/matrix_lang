@@ -40,7 +40,7 @@ load       { offset += yyleng; return LOA; }
 zero       { offset += yyleng; return ZER; }
 identity   { offset += yyleng; return IDE; }
 inverse    { offset += yyleng; return INV; }
-transposed { offset += yyleng; return TRA; }
+transpozed { offset += yyleng; return TRA; }
 
 {ID}   { offset += yyleng; return ID; }
 

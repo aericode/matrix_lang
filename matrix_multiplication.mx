@@ -1,13 +1,14 @@
 fun main() {
-    var a, b;
+    var a;
+    var b;
     var mult;
 
     a = [[1,2],[3,4]];
-    load(b, "./matrix.csv");
+    read(b , "./matrix.csv");
 
     mult = a * b;
     print("Multiplication result:\n");
     print(mult);
 
-    return 0;
+    return (0);
 }
