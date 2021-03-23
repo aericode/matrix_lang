@@ -70,4 +70,5 @@ Id -> identity ( Expression ) | Inv .
 Inv -> inverse ( Expression ) | Tra .
 Tra -> transpozed ( Expression ) | Bra.
 Bra -> ( Expression ) | Var .
-Var -> id_token Dim | literal .
+Var -> id_token Dim OptFunCall | literal .
+OptFunCall -> ( Arguments ) | .
