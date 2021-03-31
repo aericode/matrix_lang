@@ -1,8 +1,14 @@
 # Matrix Lang
 
-### Passos para fazer a análise
+### Passos para fazer a análise léxica
 
-`$ flex analyzer.flex`<br/>
+`$ flex analisador_lexico.flex`<br/>
+`$ gcc lex.yy.c -lfl`<br/>
+`$ ./a.out program.mx`<br/>
+
+### Passos para fazer a análise sintática
+
+`$ flex analisador_lexico.flex`<br/>
 `$ gcc lex.yy.c -lfl`<br/>
 `$ ./a.out program.mx`<br/>
 

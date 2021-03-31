@@ -1041,4 +1041,6 @@ int main( int argc, char **argv )
     }
 
     advance();    Program();
+
+    printf("Finished!\n");
 }
