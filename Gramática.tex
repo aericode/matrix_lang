@@ -1,0 +1,62 @@
+Program -> Definition Program | \epsilon
+
+Definition -> Struct | Instantiation ; | Function .
+
+Struct -> struct  id_token \{ Instantiations \}
+
+Instantiations -> Instantiation ; Instantiations | $\epsilon$ .
+
+Instantiation -> var id_token OptStructAtt Matrix .
+
+OptStructAtt -> . id_token | $\epsilon$ ;
+
+Matrix -> [ Expression ] Matrix | .
+
+Function -> fun id_token ( Function_argument ) Block  | fun id_token (  ) Block .
+
+Function_argument -> id_token | id_token , Function_argument
+
+Block -> \{ Statements \}
+
+Statements -> Statement Statements | $\epsilon$ .
+
+Statement -> If_block | For_block | While_block | Assign | Return_expr | Print ; | Read ; | Function_call ; .
+
+Assign -> Assignment ; | Instantiation OptAssign ; .
+
+OptAssign -> $=$ Expression | $\epsilon$ ;
+
+Assignment -> id_token $=$ Expression | id_token $-=$ Expression | id_token $+=$ Expression | id_token $*=$ Expression | id_token $/=$ Expression | id_token = Matrix_line | id_token $-=$ Matrix_line | id_token $+=$ Matrix_line | id_token $*=$ Matrix_line  | id_token$++$ | id_token$--$
+%id_token assign_operator Expression | id_token assign_operator matrix\_line
+
+Matrix_line -> [ Elements ]
+
+Elements -> Element | Element , Elements
+
+Element -> Expression | Matrix_line
+
+Return_expr -> return ( Expression ) ;
+
+For_block -> for ( var id_token ; Bool_Expression ; Assignment ) Block | for ( ; Bool_Expression ; Assignment ) Block 
+
+If_block -> if ( Bool_Expression ) Block Else_Block
+
+Else_Block -> else If_block | else Block |  \epsilon .
+
+While_block -> while ( Bool_Expression ) Block
+
+Function_call -> id_token ( Arguments )
+
+Arguments -> Expression | Expression , Arguments
+
+Print -> print (Expression)
+
+Read -> read (id_token)
+
+Expression -> id_token | Expression + Expression | Expression - Expression | Expression * Expression | Expression / Expression | -Expression | +Expression | ( Expression )| Literal | Expression \% Expression | Bool_Expression | Read | Function_call % | Expression and Expression | Expression or Expression 
+
+Bool_expression -> id_token | Bool_expression $==$ Bool_expression | Bool_expression $!=$ Bool_expression | Bool_expression $>$ Bool_expression | Bool_expression $<$ Bool_expression | Bool_expression $<=$ Bool_expression | Bool_expression $<=$ Bool_expression | $!$Bool_expression | ( Bool_expression ) | Literal | Expression $&$ Expression | Expression $||$ Expression | Function_call
+
+Literal -> Integer | Float | Char | String | Boolean
+
+% observação, não reconhecer esse literal como regra, utilizar apenas os tokens terminais no lugar do literal!!!!!!!!!!!!!!!!!!!!
