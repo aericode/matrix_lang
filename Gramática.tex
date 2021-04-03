@@ -12,7 +12,9 @@ Instantiation -> var id_token Matrix .
 
 Matrix -> [ Expression ] Matrix | .
 
-Function -> fun id_token ( Function_argument ) Block  | fun id_token (  ) Block .
+Function -> fun id_token ( Function1 ) Block .
+
+Function1 -> Function_argument | .
 
 Function_argument -> id_token | id_token , Function_argument
 
@@ -20,7 +22,7 @@ Block -> \{ Statements \}
 
 Statements -> Statement Statements | $\epsilon$ .
 
-Statement -> If_block | For_block | While_block | Assign ; | Return_expr | Print ; | Read ; | Function_call ; .
+Statement -> If_block | For_block | While_block | Assign ; | Return_expr | Print ; | Function_call ; % | Read ;  .
 
 Assign -> Assignment | Instantiation OptAssign .
 
@@ -37,7 +39,9 @@ Element -> Expression | Matrix_line
 
 Return_expr -> return ( Expression ) ;
 
-For_block -> for ( Assign ; Bool_Expression ; Assignment ) Block | for ( ; Bool_Expression ; Assignment ) Block 
+For_block -> for ( For_block1 ; Bool_Expression ; Assignment ) Block 
+
+For_block1 -> Assign | \epsilon
 
 If_block -> if ( Bool_Expression ) Block Else_Block
 
@@ -45,17 +49,19 @@ Else_Block -> else If_block | else Block |  \epsilon .
 
 While_block -> while ( Bool_Expression ) Block
 
-Function_call -> id_token ( Arguments )
+Function_call -> id_token ( Function_call1 )
+
+Function_call1 -> Arguments | \epsilon
 
 Arguments -> Expression | Expression , Arguments
 
 Print -> print (Expression)
 
-Read -> read (id_token)
+Read -> read ( String )
 
-Expression -> id_token | Expression + Expression | Expression - Expression | Expression * Expression | Expression / Expression | Expression ^ Expression | -Expression | +Expression | ( Expression )| Literal | Expression \% Expression | Bool_Expression | Read | Function_call % | Expression and Expression | Expression or Expression 
+Expression -> id_token | Expression + Expression | Expression - Expression | Expression * Expression | Expression / Expression | Expression ^ Expression | -Expression | +Expression | ( Expression )| Literal | Expression \% Expression | Bool_Expression | Read | id_token [ Expression ] % Function_call % | Expression and Expression | Expression or Expression 
 
-Bool_expression -> id_token | Expression $==$ Expression | Expression $!=$ Expression | Expression $>$ Expression | Expression $<$ Expression | Expression $<=$ Expression | Expression $<=$ Expression | $!$Bool_expression | ( Bool_expression ) | Literal | Bool_Expression $&$ Bool_Expression | Bool_Expression $||$ Bool_Expression | Function_call
+%Bool_expression -> id_token | Expression $==$ Expression | Expression $!=$ Expression | Expression $>$ Expression | Expression $<$ Expression | Expression $<=$ Expression | Expression $<=$ Expression | $!$Bool_expression | ( Bool_expression ) | Literal | Bool_Expression $&$ Bool_Expression | Bool_Expression $||$ Bool_Expression | Function_call
 
 Literal -> Integer | Float | Char | String | Boolean
 

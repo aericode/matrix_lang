@@ -1,15 +1,12 @@
 fun swap(a, b){
-    var t;
-    t = a;
+    var t = a;
     a = b;
     b = t;
 }
 
 fun partition (array, low, high){
-    var pivot;
-    pivot = array[high];
-    var i;
-    i = (low - 1);
+    var pivot = array[high];
+    var i = (low - 1);
 
     var j;
     for (j = low; j <= high - 1; j++){
@@ -24,18 +21,15 @@ fun partition (array, low, high){
 
 fun quickSort(array, low, high){
     if (low < high){
-        var pi;
-        pi = partition (array, low, high);
+        var pi = partition (array, low, high);
         quickSort(array, low, pi - 1);
         quickSort(array, pi + 1, high);
     }
 }
 
 fun main(){
-    var array;
-    array = [1, 5, 2, 3, 4];
-    var size;
-    size = 5;
+    var array = [1, 5, 2, 3, 4];
+    var size = 5;
     quickSort(array, 0, size - 1);
     print(array);
     return (0);

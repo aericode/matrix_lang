@@ -4,7 +4,7 @@ fun main() {
     var mult;
 
     a = [[1,2],[3,4]];
-    read(b , "./matrix.csv");
+    b = read("./matrix.csv");
 
     mult = a * b;
     print("Multiplication result:\n");

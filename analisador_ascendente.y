@@ -19,128 +19,155 @@ Program: Definition Program
     |
     ;
 
-Definition: Instantiation ';'
+Definition: Instantiation ';' { printf("; (%d %d)\n", yylineno, offset ); }
     | Struct 
     | Function
     ;
 
-Struct: STU ID '{' Instantiations '}'
+Struct: STU { printf("STRUCT (%d %d)\n", yylineno, offset ); } ID { printf("ID (%d %d)\n", yylineno, offset ); } '{' { printf("{ (%d %d)\n", yylineno, offset ); } Instantiations '}' { printf("} (%d %d)\n", yylineno, offset ); }
     ;
 
-Instantiations: Instantiation ';' Instantiations
+Instantiations: Instantiation ';' { printf("; (%d %d)\n", yylineno, offset ); } Instantiations
     |
     ;
 
-Instantiation: VAR ID Matrix
+Instantiation: VAR { printf("VAR (%d %d)\n", yylineno, offset ); } ID { printf("ID (%d %d)\n", yylineno, offset ); } Matrix
     ;
 
-Matrix: '[' INT ']' Matrix
+Matrix: '[' { printf("[ (%d %d)\n", yylineno, offset ); } Expression ']' { printf("] (%d %d)\n", yylineno, offset ); } Matrix
     |
     ;
 
-Function: FUN ID '(' Function_argument ')' Block
-    | FUN ID '('  ')' Block
+Function: FUN { printf("FUNCTION (%d %d)\n", yylineno, offset ); } ID { printf("ID (%d %d)\n", yylineno, offset ); } '(' { printf("( (%d %d)\n", yylineno, offset ); } Function1 ')' { printf(") (%d %d)\n", yylineno, offset ); } Block
     ;
 
-Function_argument: ID
-    | ID ',' Function_argument
+Function1: Function_argument
+    |
     ;
 
-Block: '{' Statements '}'
+Function_argument: ID { printf("ID (%d %d)\n", yylineno, offset ); }
+    | ID { printf("ID (%d %d)\n", yylineno, offset ); } ',' Function_argument
+    ;
+
+Block: '{' { printf("{ (%d %d)\n", yylineno, offset ); } Statements '}' { printf("} (%d %d)\n", yylineno, offset ); }
     ;
 
 Statements: Statement Statements
     |
     ;
 
-Statement: Assign ';'
+Statement: Assign ';' { printf("; (%d %d)\n", yylineno, offset ); }
     | Return_expr
     | For_block
     | If_block
     | While_block
-    | Function_call
-    | Print
+    | Function_call ';' { printf("; (%d %d)\n", yylineno, offset ); }
+    | Print ';' { printf("; (%d %d)\n", yylineno, offset ); }
     ;
 
 Assign: Assignment
     | Instantiation OptAssign
     ;
 
-OptAssign: '=' Expression
+OptAssign: '=' { printf("= (%d %d)\n", yylineno, offset ); } Expression
+    | '=' { printf("= (%d %d)\n", yylineno, offset ); } Matrix_line
     |
     ;
 
-Assignment: ID Matrix '=' Expression
-    | ID Matrix APL Expression
-    | ID Matrix AMI Expression
-    | ID Matrix ADI Expression
-    | ID Matrix AMU Expression
-    | ID Matrix '=' Matrix_line
-    | ID Matrix APL Matrix_line
-    | ID Matrix AMI Matrix_line
-    | ID Matrix AMU Matrix_line
-    | ID Matrix UAD
-    | ID Matrix USU
+Assignment: ID Matrix '=' { printf("= (%d %d)\n", yylineno, offset ); } Expression
+    | ID Matrix APL { printf("+= (%d %d)\n", yylineno, offset ); } Expression
+    | ID Matrix AMI { printf("-= (%d %d)\n", yylineno, offset ); } Expression
+    | ID Matrix ADI { printf("/= (%d %d)\n", yylineno, offset ); } Expression
+    | ID Matrix AMU { printf("*= (%d %d)\n", yylineno, offset ); } Expression
+    | ID Matrix '=' { printf("= (%d %d)\n", yylineno, offset ); } Matrix_line
+    | ID Matrix APL { printf("+= (%d %d)\n", yylineno, offset ); } Matrix_line
+    | ID Matrix AMI { printf("-= (%d %d)\n", yylineno, offset ); } Matrix_line
+    | ID Matrix AMU { printf("*= (%d %d)\n", yylineno, offset ); } Matrix_line
+    | ID Matrix UAD { printf("++ (%d %d)\n", yylineno, offset ); }
+    | ID Matrix USU { printf("-- (%d %d)\n", yylineno, offset ); }
     ;
 
-Matrix_line: '[' Elements ']'
+Matrix_line: '[' { printf("[ (%d %d)\n", yylineno, offset ); } Elements ']' { printf("] (%d %d)\n", yylineno, offset ); }
 
 Elements: Element
-    | Element ',' Elements
+    | Element ',' { printf(", (%d %d)\n", yylineno, offset ); } Elements
     ;
 
 Element: Expression
     | Matrix_line
     ;
 
-Return_expr: RET '(' Expression ')' ';'
+Return_expr: RET { printf("RETURN (%d %d)\n", yylineno, offset ); } '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); } ';' { printf("; (%d %d)\n", yylineno, offset ); }
     ;
 
-For_block: FOR '(' Assign ';' Bool_Expression ';' Assignment ')' Block
-    | FOR '('  ';' Bool_Expression ';' Assignment ')' Block
+For_block: FOR { printf("FOR (%d %d)\n", yylineno, offset ); } '(' { printf("( (%d %d)\n", yylineno, offset ); } For_block1 ';' { printf("; (%d %d)\n", yylineno, offset ); } Expression ';' { printf("; (%d %d)\n", yylineno, offset ); } Assignment ')' { printf(") (%d %d)\n", yylineno, offset ); } Block
     ;
 
-If_block: IF '(' Bool_Expression ')' Block Else_Block
-    ;
-
-Else_Block: ELS If_block
-    | ELS Block
+For_block1: Assign
     |
     ;
 
-While_block: WHI '(' Bool_Expression ')' Block
+If_block: IF { printf("IF (%d %d)\n", yylineno, offset ); } '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); } Block Else_Block
     ;
 
-Function_call: ID '(' Arguments ')'
+Else_Block: ELS { printf("ELSE (%d %d)\n", yylineno, offset ); } If_block
+    | ELS { printf("ELSE (%d %d)\n", yylineno, offset ); } Block
+    |
+    ;
+
+While_block: WHI { printf("WHILE (%d %d)\n", yylineno, offset ); } '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); } Block
+    ;
+
+Function_call: ID { printf("ID (%d %d)\n", yylineno, offset ); } '(' { printf("( (%d %d)\n", yylineno, offset ); } Function_call1 ')' { printf(") (%d %d)\n", yylineno, offset ); }
+    ;
+
+Function_call1: Arguments 
+    |
     ;
 
 Arguments: Expression 
-    | Expression ',' Arguments
+    | Expression ',' { printf(", (%d %d)\n", yylineno, offset ); } Arguments
 
-Print: PRI '(' Expression ')'
+Print: PRI { printf("PRINT (%d %d)\n", yylineno, offset ); } '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); }
     ;
 
-Read: REA '(' ID ')'
+Read: REA { printf("READ (%d %d)\n", yylineno, offset ); } '(' { printf("( (%d %d)\n", yylineno, offset ); } STR { printf("STRING (%d %d)\n", yylineno, offset ); } ')' { printf(") (%d %d)\n", yylineno, offset ); }
     ;
 
-Expression: INT
-    | FLO
-    | CHA
-    | STR
-    | Expression '+' Expression 
-    | Expression '-' Expression 
-    | Expression '*' Expression 
-    | Expression '/' Expression 
-    | Expression '^' Expression 
+Expression: INT { printf("INT (%d %d)\n", yylineno, offset ); }
+    | FLO { printf("FLOAT (%d %d)\n", yylineno, offset ); }
+    | CHA { printf("CHAR (%d %d)\n", yylineno, offset ); }
+    | STR { printf("STRING (%d %d)\n", yylineno, offset ); }
+    | Expression '+' { printf("+ (%d %d)\n", yylineno, offset ); } Expression 
+    | Expression '-' { printf("- (%d %d)\n", yylineno, offset ); } Expression 
+    | Expression '*' { printf("* (%d %d)\n", yylineno, offset ); } Expression 
+    | Expression '/' { printf("/ (%d %d)\n", yylineno, offset ); } Expression 
+    | Expression '^' { printf("^ (%d %d)\n", yylineno, offset ); } Expression 
     | Expression EQU Expression
-    | '-' Expression 
-    | '+' Expression 
-    | Expression '%' Expression 
-    | '(' Expression ')'
-    | Bool_Expression 
+    | '-' { printf("- (%d %d)\n", yylineno, offset ); } Expression 
+    | '+' { printf("+ (%d %d)\n", yylineno, offset ); } Expression 
+    | Expression '%' { printf("MOD (%d %d)\n", yylineno, offset ); } Expression 
+    | '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); }
+    /* | Bool_Expression */
     | Read 
+    | BOO { printf("BOOLEAN (%d %d)\n", yylineno, offset ); }
+    | Function_call 
+    | ID { printf("ID (%d %d)\n", yylineno, offset ); }
+    | Expression OR { printf("OR (%d %d)\n", yylineno, offset ); } Expression
+    | Expression '&' { printf("AND (%d %d)\n", yylineno, offset ); } Expression
+    | '!' { printf("! (%d %d)\n", yylineno, offset ); } Expression
+    | Expression DIO { printf("!= (%d %d)\n", yylineno, offset ); } Expression
+    | Expression LEQ { printf("<= (%d %d)\n", yylineno, offset ); } Expression
+    | Expression LEO { printf("< (%d %d)\n", yylineno, offset ); } Expression
+    | Expression GEQ { printf(">= (%d %d)\n", yylineno, offset ); } Expression
+    | Expression GRE { printf("< (%d %d)\n", yylineno, offset ); } Expression
+    | IDE '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); }
+    | INV '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); }
+    | TRA '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); }
+    | ZER '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); }
+    | ID '[' { printf("[ (%d %d)\n", yylineno, offset ); } Expression ']' { printf("] (%d %d)\n", yylineno, offset ); }
     ;
-
+/*
 Bool_Expression: BOO
     | ID
     | Function_call
@@ -153,7 +180,7 @@ Bool_Expression: BOO
     | Bool_Expression GEQ Bool_Expression
     | Bool_Expression GRE Bool_Expression
     ;
-
+*/
 /*
 Bool_Expression: TLog Expression1 
     ;
