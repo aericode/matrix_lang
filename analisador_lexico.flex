@@ -79,8 +79,9 @@ transposed { offset += yyleng; return TRA; }
 
 ","    { offset += yyleng; return ','; }
 ";"    { offset += yyleng; return ';'; }
+"."    { offset += yyleng; return '.'; }
 
-\n      { offset = 1; return EOL; }
+\n      { offset = 1; }
 
 "//".*   /* one-line comments */
 

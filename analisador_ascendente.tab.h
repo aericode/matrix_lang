@@ -38,7 +38,7 @@
 # define YY_YY_ANALISADOR_ASCENDENTE_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 0
+# define YYDEBUG 1
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -62,32 +62,66 @@ extern int yydebug;
     RET = 268,
     STU = 269,
     FUN = 270,
-    LIT = 271,
-    PRI = 272,
-    REA = 273,
-    LOA = 274,
-    ZER = 275,
-    IDE = 276,
-    INV = 277,
-    TRA = 278,
-    EQU = 279,
-    ID = 280,
-    DIO = 281,
-    LEQ = 282,
-    LEO = 283,
-    GEQ = 284,
-    GRE = 285,
-    APL = 286,
-    AMI = 287,
-    ADI = 288,
-    AMU = 289,
-    UAD = 290,
-    USU = 291,
-    OR = 292,
-    VAR = 293,
-    EOL = 294
+    PRI = 271,
+    REA = 272,
+    LOA = 273,
+    ZER = 274,
+    IDE = 275,
+    INV = 276,
+    TRA = 277,
+    EQU = 278,
+    ID = 279,
+    DIO = 280,
+    LEQ = 281,
+    LEO = 282,
+    GEQ = 283,
+    GRE = 284,
+    APL = 285,
+    AMI = 286,
+    ADI = 287,
+    AMU = 288,
+    UAD = 289,
+    USU = 290,
+    OR = 291,
+    VAR = 292
   };
 #endif
+/* Tokens.  */
+#define INT 258
+#define FLO 259
+#define CHA 260
+#define BOO 261
+#define STR 262
+#define IF 263
+#define ELS 264
+#define FOR 265
+#define DO 266
+#define WHI 267
+#define RET 268
+#define STU 269
+#define FUN 270
+#define PRI 271
+#define REA 272
+#define LOA 273
+#define ZER 274
+#define IDE 275
+#define INV 276
+#define TRA 277
+#define EQU 278
+#define ID 279
+#define DIO 280
+#define LEQ 281
+#define LEO 282
+#define GEQ 283
+#define GRE 284
+#define APL 285
+#define AMI 286
+#define ADI 287
+#define AMU 288
+#define UAD 289
+#define USU 290
+#define OR 291
+#define VAR 292
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

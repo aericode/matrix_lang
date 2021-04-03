@@ -6,9 +6,9 @@ Struct -> struct  id_token \{ Instantiations \}
 
 Instantiations -> Instantiation ; Instantiations | $\epsilon$ .
 
-Instantiation -> var id_token OptStructAtt Matrix .
+Instantiation -> var id_token Matrix .
 
-OptStructAtt -> . id_token | $\epsilon$ ;
+%OptStructAtt -> . id_token | $\epsilon$ ;
 
 Matrix -> [ Expression ] Matrix | .
 
@@ -20,13 +20,13 @@ Block -> \{ Statements \}
 
 Statements -> Statement Statements | $\epsilon$ .
 
-Statement -> If_block | For_block | While_block | Assign | Return_expr | Print ; | Read ; | Function_call ; .
+Statement -> If_block | For_block | While_block | Assign ; | Return_expr | Print ; | Read ; | Function_call ; .
 
-Assign -> Assignment ; | Instantiation OptAssign ; .
+Assign -> Assignment | Instantiation OptAssign .
 
 OptAssign -> $=$ Expression | $\epsilon$ ;
 
-Assignment -> id_token $=$ Expression | id_token $-=$ Expression | id_token $+=$ Expression | id_token $*=$ Expression | id_token $/=$ Expression | id_token = Matrix_line | id_token $-=$ Matrix_line | id_token $+=$ Matrix_line | id_token $*=$ Matrix_line  | id_token$++$ | id_token$--$
+Assignment -> id_token Matrix $=$ Expression | id_token Matrix $-=$ Expression | id_token Matrix $+=$ Expression | id_token Matrix $*=$ Expression | id_token Matrix $/=$ Expression | id_token Matrix = Matrix_line | id_token Matrix $-=$ Matrix_line | id_token Matrix $+=$ Matrix_line | id_token Matrix $*=$ Matrix_line  | id_token Matrix$++$ | id_token Matrix$--$
 %id_token assign_operator Expression | id_token assign_operator matrix\_line
 
 Matrix_line -> [ Elements ]
@@ -37,7 +37,7 @@ Element -> Expression | Matrix_line
 
 Return_expr -> return ( Expression ) ;
 
-For_block -> for ( var id_token ; Bool_Expression ; Assignment ) Block | for ( ; Bool_Expression ; Assignment ) Block 
+For_block -> for ( Assign ; Bool_Expression ; Assignment ) Block | for ( ; Bool_Expression ; Assignment ) Block 
 
 If_block -> if ( Bool_Expression ) Block Else_Block
 
@@ -53,9 +53,9 @@ Print -> print (Expression)
 
 Read -> read (id_token)
 
-Expression -> id_token | Expression + Expression | Expression - Expression | Expression * Expression | Expression / Expression | -Expression | +Expression | ( Expression )| Literal | Expression \% Expression | Bool_Expression | Read | Function_call % | Expression and Expression | Expression or Expression 
+Expression -> id_token | Expression + Expression | Expression - Expression | Expression * Expression | Expression / Expression | Expression ^ Expression | -Expression | +Expression | ( Expression )| Literal | Expression \% Expression | Bool_Expression | Read | Function_call % | Expression and Expression | Expression or Expression 
 
-Bool_expression -> id_token | Bool_expression $==$ Bool_expression | Bool_expression $!=$ Bool_expression | Bool_expression $>$ Bool_expression | Bool_expression $<$ Bool_expression | Bool_expression $<=$ Bool_expression | Bool_expression $<=$ Bool_expression | $!$Bool_expression | ( Bool_expression ) | Literal | Expression $&$ Expression | Expression $||$ Expression | Function_call
+Bool_expression -> id_token | Expression $==$ Expression | Expression $!=$ Expression | Expression $>$ Expression | Expression $<$ Expression | Expression $<=$ Expression | Expression $<=$ Expression | $!$Bool_expression | ( Bool_expression ) | Literal | Bool_Expression $&$ Bool_Expression | Bool_Expression $||$ Bool_Expression | Function_call
 
 Literal -> Integer | Float | Char | String | Boolean
 
