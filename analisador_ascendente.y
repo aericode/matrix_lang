@@ -74,17 +74,21 @@ OptAssign: '=' { printf("= (%d %d)\n", yylineno, offset ); } Expression
     |
     ;
 
-Assignment: ID Matrix '=' { printf("= (%d %d)\n", yylineno, offset ); } Expression
-    | ID Matrix APL { printf("+= (%d %d)\n", yylineno, offset ); } Expression
-    | ID Matrix AMI { printf("-= (%d %d)\n", yylineno, offset ); } Expression
-    | ID Matrix ADI { printf("/= (%d %d)\n", yylineno, offset ); } Expression
-    | ID Matrix AMU { printf("*= (%d %d)\n", yylineno, offset ); } Expression
-    | ID Matrix '=' { printf("= (%d %d)\n", yylineno, offset ); } Matrix_line
-    | ID Matrix APL { printf("+= (%d %d)\n", yylineno, offset ); } Matrix_line
-    | ID Matrix AMI { printf("-= (%d %d)\n", yylineno, offset ); } Matrix_line
-    | ID Matrix AMU { printf("*= (%d %d)\n", yylineno, offset ); } Matrix_line
-    | ID Matrix UAD { printf("++ (%d %d)\n", yylineno, offset ); }
-    | ID Matrix USU { printf("-- (%d %d)\n", yylineno, offset ); }
+Assignment: ID { printf("ID (%d %d)\n", yylineno, offset ); } Assignment1
+    ;
+
+
+Assignment1: Matrix '=' { printf("= (%d %d)\n", yylineno, offset ); } Expression
+    | Matrix APL { printf("+= (%d %d)\n", yylineno, offset ); } Expression
+    | Matrix AMI { printf("-= (%d %d)\n", yylineno, offset ); } Expression
+    | Matrix ADI { printf("/= (%d %d)\n", yylineno, offset ); } Expression
+    | Matrix AMU { printf("*= (%d %d)\n", yylineno, offset ); } Expression
+    | Matrix '=' { printf("= (%d %d)\n", yylineno, offset ); } Matrix_line
+    | Matrix APL { printf("+= (%d %d)\n", yylineno, offset ); } Matrix_line
+    | Matrix AMI { printf("-= (%d %d)\n", yylineno, offset ); } Matrix_line
+    | Matrix AMU { printf("*= (%d %d)\n", yylineno, offset ); } Matrix_line
+    | Matrix UAD { printf("++ (%d %d)\n", yylineno, offset ); }
+    | Matrix USU { printf("-- (%d %d)\n", yylineno, offset ); }
     ;
 
 Matrix_line: '[' { printf("[ (%d %d)\n", yylineno, offset ); } Elements ']' { printf("] (%d %d)\n", yylineno, offset ); }
