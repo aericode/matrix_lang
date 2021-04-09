@@ -7,9 +7,10 @@ int yylex(void);
 void yyerror(char *);
 %}
 
-%token INT FLO CHA BOO STR IF ELS FOR DO WHI RET STU FUN PRI REA LOA ZER IDE INV TRA EQU ID DIO LEQ LEO GEQ GRE APL AMI ADI AMU UAD USU OR VAR '{' '}' '(' ')' '[' ']' 
+%token INT FLO CHA BOO STR IF ELS FOR DO WHI RET STU FUN PRI REA LOA ZER IDE INV TRA EQU ID DIO LEQ LEO GEQ GRE APL AMI ADI AMU UAD USU OR VAR 
 
-%left '+' '-' '&' OR EQU DIO LEQ LEO GEQ GRE
+%left '+' '-' '&' OR 
+%nonassoc EQU DIO LEQ LEO GEQ GRE
 %left '*' '/' '%' '!'
 %right '^'
 
@@ -152,7 +153,6 @@ Expression: INT { printf("INT (%d %d)\n", yylineno, offset ); }
     | '+' { printf("+ (%d %d)\n", yylineno, offset ); } Expression 
     | Expression '%' { printf("MOD (%d %d)\n", yylineno, offset ); } Expression 
     | '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); }
-    /* | Bool_Expression */
     | Read 
     | BOO { printf("BOOLEAN (%d %d)\n", yylineno, offset ); }
     | Function_call 
@@ -171,107 +171,7 @@ Expression: INT { printf("INT (%d %d)\n", yylineno, offset ); }
     | ZER '(' { printf("( (%d %d)\n", yylineno, offset ); } Expression ')' { printf(") (%d %d)\n", yylineno, offset ); }
     | ID '[' { printf("[ (%d %d)\n", yylineno, offset ); } Expression ']' { printf("] (%d %d)\n", yylineno, offset ); }
     ;
-/*
-Bool_Expression: BOO
-    | ID
-    | Function_call
-    | Bool_Expression OR Bool_Expression
-    | Bool_Expression '&' Bool_Expression
-    | '!' Bool_Expression
-    | Bool_Expression DIO Bool_Expression
-    | Bool_Expression LEQ Bool_Expression
-    | Bool_Expression LEO Bool_Expression
-    | Bool_Expression GEQ Bool_Expression
-    | Bool_Expression GRE Bool_Expression
-    ;
-*/
-/*
-Bool_Expression: TLog Expression1 
-    ;
 
-Expression1: OR TLog Expression1
-    |
-    ;
-
-TLog: FLog TLog1
-    ;
-
-TLog1: '&' FLog TLog1 
-    | 
-    ;
-
-FLog: '!' ERel 
-    | ERel
-    ;
-
-ERel: LRel FLRel
-    ;
-
-FLRel: EQU LRel 
-    |
-    ; 
-
-LRel: LERel FLERel
-    ;
-
-FLERel: LEO LERel 
-    | 
-    ;
-
-LERel: GRel FGRel
-    ;
-
-FGRel: LEQ GRel 
-    | 
-    ;
-
-GRel: GERel FGERel
-    ;
-
-FGERel: GRE GERel 
-    |
-    ;
-
-GERel: DRel FDRel
-    ;
-
-FDRel: GEQ DRel 
-    | 
-    ;
-
-DRel: AOp FAOp
-    ;
-
-FAOp: DIO AOp 
-    | 
-    ;
-
-AOp: BOO
-    | ID
-    ;
-*/
-
-/*
-Bool_Expression: BOO
-    | ID
-    | Function_call
-    | Bool_Expression OR Bool_Expression
-    | Bool_Expression '&' Bool_Expression
-    | '!' Bool_Expression
-    | Expression EQU Expression
-    
-    | Bool_Expression EQU Bool_Expression
-    | Bool_Expression DIO Bool_Expression
-    | Bool_Expression LEQ Bool_Expression
-    | Bool_Expression LEO Bool_Expression
-    | Bool_Expression GEQ Bool_Expression
-    | Bool_Expression GRE Bool_Expression
-    | '!' Bool_Expression
-    | '(' Bool_Expression ')'
-    | Expression '&' Expression
-    | Expression OR Expression
-    ;
-*/
 
 %%
 
