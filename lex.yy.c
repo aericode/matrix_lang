@@ -555,11 +555,12 @@ char *yytext;
 #line 1 "analisador_lexico.flex"
 #line 2 "analisador_lexico.flex"
 #include <math.h>
+#include "test.h"
 #include "analisador_ascendente.tab.h"
 
 int offset = 1;
-#line 562 "lex.yy.c"
 #line 563 "lex.yy.c"
+#line 564 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -776,10 +777,10 @@ YY_DECL
 		}
 
 	{
-#line 17 "analisador_lexico.flex"
+#line 18 "analisador_lexico.flex"
 
 
-#line 783 "lex.yy.c"
+#line 784 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -848,300 +849,300 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 19 "analisador_lexico.flex"
-{ offset += yyleng; return INT; }
+#line 20 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return INT; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 20 "analisador_lexico.flex"
-{ offset += yyleng; return FLO; }
+#line 21 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return FLO; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 21 "analisador_lexico.flex"
-{ offset += yyleng; return CHA; }
+#line 22 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return CHA; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 22 "analisador_lexico.flex"
-{ offset += yyleng; return BOO; }
+#line 23 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return BOO; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 23 "analisador_lexico.flex"
-{ offset += yyleng; return STR; }
+#line 24 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return STR; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 25 "analisador_lexico.flex"
-{ offset += yyleng; return VAR; }
+#line 26 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return VAR; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 26 "analisador_lexico.flex"
-{ offset += yyleng; return IF; }
+#line 27 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return IF; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 27 "analisador_lexico.flex"
-{ offset += yyleng; return ELS; }
+#line 28 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return ELS; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 28 "analisador_lexico.flex"
-{ offset += yyleng; return FOR; }
+#line 29 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return FOR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 29 "analisador_lexico.flex"
-{ offset += yyleng; return DO; }
+#line 30 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return DO; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 30 "analisador_lexico.flex"
-{ offset += yyleng; return WHI; }
+#line 31 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return WHI; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 31 "analisador_lexico.flex"
-{ offset += yyleng; return RET; }
+#line 32 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return RET; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 32 "analisador_lexico.flex"
-{ offset += yyleng; return STU; }
+#line 33 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return STU; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 33 "analisador_lexico.flex"
-{ offset += yyleng; return FUN; }
+#line 34 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return FUN; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 34 "analisador_lexico.flex"
-{ offset += yyleng; return PRI; }
+#line 35 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return PRI; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 35 "analisador_lexico.flex"
-{ offset += yyleng; return REA; }
+#line 36 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return REA; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 36 "analisador_lexico.flex"
-{ offset += yyleng; return LOA; }
+#line 37 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return LOA; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 37 "analisador_lexico.flex"
-{ offset += yyleng; return ZER; }
+#line 38 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return ZER; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 38 "analisador_lexico.flex"
-{ offset += yyleng; return IDE; }
+#line 39 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return IDE; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 39 "analisador_lexico.flex"
-{ offset += yyleng; return INV; }
+#line 40 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return INV; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 40 "analisador_lexico.flex"
-{ offset += yyleng; return TRA; }
+#line 41 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return TRA; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 42 "analisador_lexico.flex"
-{ offset += yyleng; return ID; }
+#line 43 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return ID; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 44 "analisador_lexico.flex"
-{ offset += yyleng; return '('; }
+#line 45 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '('; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 45 "analisador_lexico.flex"
-{ offset += yyleng; return ')'; }
+#line 46 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return ')'; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 47 "analisador_lexico.flex"
-{ offset += yyleng; return '{'; }
+#line 48 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '{'; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 48 "analisador_lexico.flex"
-{ offset += yyleng; return '}'; }
+#line 49 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '}'; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 50 "analisador_lexico.flex"
-{ offset += yyleng; return '['; }
+#line 51 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '['; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 51 "analisador_lexico.flex"
-{ offset += yyleng; return ']'; }
+#line 52 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return ']'; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 53 "analisador_lexico.flex"
-{ offset += yyleng; return EQU; }
+#line 54 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return EQU; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 54 "analisador_lexico.flex"
-{ offset += yyleng; return DIO; }
+#line 55 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return DIO; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 55 "analisador_lexico.flex"
-{ offset += yyleng; return LEQ; }
+#line 56 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return LEQ; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 56 "analisador_lexico.flex"
-{ offset += yyleng; return LEO; }
+#line 57 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return LEO; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 57 "analisador_lexico.flex"
-{ offset += yyleng; return GEQ; }
+#line 58 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return GEQ; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 58 "analisador_lexico.flex"
-{ offset += yyleng; return GRE; }
+#line 59 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return GRE; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 60 "analisador_lexico.flex"
-{ offset += yyleng; return '='; }
+#line 61 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '='; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 61 "analisador_lexico.flex"
-{ offset += yyleng; return APL; }
+#line 62 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return APL; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 62 "analisador_lexico.flex"
-{ offset += yyleng; return AMI; }
+#line 63 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return AMI; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 63 "analisador_lexico.flex"
-{ offset += yyleng; return ADI; }
+#line 64 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return ADI; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 64 "analisador_lexico.flex"
-{ offset += yyleng; return AMU; }
+#line 65 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return AMU; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 66 "analisador_lexico.flex"
-{ offset += yyleng; return UAD; }
+#line 67 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return UAD; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 67 "analisador_lexico.flex"
-{ offset += yyleng; return USU; }
+#line 68 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return USU; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 69 "analisador_lexico.flex"
-{ offset += yyleng; return '&'; }
+#line 70 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '&'; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 70 "analisador_lexico.flex"
-{ offset += yyleng; return '!'; }
+#line 71 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '!'; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 71 "analisador_lexico.flex"
-{ offset += yyleng; return OR; }
+#line 72 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return OR; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 73 "analisador_lexico.flex"
-{ offset += yyleng; return '+'; }
+#line 74 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '+'; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 74 "analisador_lexico.flex"
-{ offset += yyleng; return '-'; }
+#line 75 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '-'; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 75 "analisador_lexico.flex"
-{ offset += yyleng; return '*'; }
+#line 76 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '*'; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 76 "analisador_lexico.flex"
-{ offset += yyleng; return '/'; }
+#line 77 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '/'; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 77 "analisador_lexico.flex"
-{ offset += yyleng; return '%'; }
+#line 78 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '%'; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 78 "analisador_lexico.flex"
-{ offset += yyleng; return '^'; }
+#line 79 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '^'; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 80 "analisador_lexico.flex"
-{ offset += yyleng; return ','; }
+#line 81 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return ','; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 81 "analisador_lexico.flex"
-{ offset += yyleng; return ';'; }
+#line 82 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return ';'; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 82 "analisador_lexico.flex"
-{ offset += yyleng; return '.'; }
+#line 83 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return '.'; }
 	YY_BREAK
 case 54:
 /* rule 54 can match eol */
 YY_RULE_SETUP
-#line 84 "analisador_lexico.flex"
+#line 85 "analisador_lexico.flex"
 { offset = 1; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 86 "analisador_lexico.flex"
+#line 87 "analisador_lexico.flex"
 /* one-line comments */
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 88 "analisador_lexico.flex"
+#line 89 "analisador_lexico.flex"
 { offset += yyleng; }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 90 "analisador_lexico.flex"
-{ offset += yyleng; return EOF; }
+#line 91 "analisador_lexico.flex"
+{ offset += yyleng; strcpy(yylval.val, yytext); return EOF; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 92 "analisador_lexico.flex"
+#line 93 "analisador_lexico.flex"
 { printf( "%d %d Lexical error: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 94 "analisador_lexico.flex"
+#line 95 "analisador_lexico.flex"
 ECHO;
 	YY_BREAK
-#line 1145 "lex.yy.c"
+#line 1146 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2156,6 +2157,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 94 "analisador_lexico.flex"
+#line 95 "analisador_lexico.flex"
 
 

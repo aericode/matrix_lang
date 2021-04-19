@@ -1,5 +1,6 @@
 %{
 #include <math.h>
+#include "test.h"
 #include "analisador_ascendente.tab.h"
 
 int offset = 1;
@@ -16,70 +17,70 @@ STRING     \".*\"
 
 %%
 
-{DIGIT}+            { offset += yyleng; return INT; }
-{DIGIT}+"."{DIGIT}* { offset += yyleng; return FLO; }
-{CHARACTER}         { offset += yyleng; return CHA; }
-{BOOLEAN}           { offset += yyleng; return BOO; }
-{STRING}            { offset += yyleng; return STR; }
+{DIGIT}+            { offset += yyleng; strcpy(yylval.val, yytext); return INT; }
+{DIGIT}+"."{DIGIT}* { offset += yyleng; strcpy(yylval.val, yytext); return FLO; }
+{CHARACTER}         { offset += yyleng; strcpy(yylval.val, yytext); return CHA; }
+{BOOLEAN}           { offset += yyleng; strcpy(yylval.val, yytext); return BOO; }
+{STRING}            { offset += yyleng; strcpy(yylval.val, yytext); return STR; }
 
-var        { offset += yyleng; return VAR; }
-if         { offset += yyleng; return IF; }
-else       { offset += yyleng; return ELS; }
-for        { offset += yyleng; return FOR; }
-do         { offset += yyleng; return DO; }
-while      { offset += yyleng; return WHI; }
-return     { offset += yyleng; return RET; }
-struct     { offset += yyleng; return STU; }
-fun        { offset += yyleng; return FUN; }
-print      { offset += yyleng; return PRI; }
-read       { offset += yyleng; return REA; }
-load       { offset += yyleng; return LOA; }
-zero       { offset += yyleng; return ZER; }
-identity   { offset += yyleng; return IDE; }
-inverse    { offset += yyleng; return INV; }
-transposed { offset += yyleng; return TRA; }
+var        { offset += yyleng; strcpy(yylval.val, yytext); return VAR; }
+if         { offset += yyleng; strcpy(yylval.val, yytext); return IF; }
+else       { offset += yyleng; strcpy(yylval.val, yytext); return ELS; }
+for        { offset += yyleng; strcpy(yylval.val, yytext); return FOR; }
+do         { offset += yyleng; strcpy(yylval.val, yytext); return DO; }
+while      { offset += yyleng; strcpy(yylval.val, yytext); return WHI; }
+return     { offset += yyleng; strcpy(yylval.val, yytext); return RET; }
+struct     { offset += yyleng; strcpy(yylval.val, yytext); return STU; }
+fun        { offset += yyleng; strcpy(yylval.val, yytext); return FUN; }
+print      { offset += yyleng; strcpy(yylval.val, yytext); return PRI; }
+read       { offset += yyleng; strcpy(yylval.val, yytext); return REA; }
+load       { offset += yyleng; strcpy(yylval.val, yytext); return LOA; }
+zero       { offset += yyleng; strcpy(yylval.val, yytext); return ZER; }
+identity   { offset += yyleng; strcpy(yylval.val, yytext); return IDE; }
+inverse    { offset += yyleng; strcpy(yylval.val, yytext); return INV; }
+transposed { offset += yyleng; strcpy(yylval.val, yytext); return TRA; }
 
-{ID}   { offset += yyleng; return ID; }
+{ID}   { offset += yyleng; strcpy(yylval.val, yytext); return ID; }
 
-"("    { offset += yyleng; return '('; }
-")"    { offset += yyleng; return ')'; }
+"("    { offset += yyleng; strcpy(yylval.val, yytext); return '('; }
+")"    { offset += yyleng; strcpy(yylval.val, yytext); return ')'; }
 
-"{"    { offset += yyleng; return '{'; }
-"}"    { offset += yyleng; return '}'; }
+"{"    { offset += yyleng; strcpy(yylval.val, yytext); return '{'; }
+"}"    { offset += yyleng; strcpy(yylval.val, yytext); return '}'; }
 
-"["    { offset += yyleng; return '['; }
-"]"    { offset += yyleng; return ']'; }
+"["    { offset += yyleng; strcpy(yylval.val, yytext); return '['; }
+"]"    { offset += yyleng; strcpy(yylval.val, yytext); return ']'; }
 
-"=="   { offset += yyleng; return EQU; }
-"!="   { offset += yyleng; return DIO; }
-"<="   { offset += yyleng; return LEQ; }
-"<"    { offset += yyleng; return LEO; }
-">="   { offset += yyleng; return GEQ; }
-">"    { offset += yyleng; return GRE; }
+"=="   { offset += yyleng; strcpy(yylval.val, yytext); return EQU; }
+"!="   { offset += yyleng; strcpy(yylval.val, yytext); return DIO; }
+"<="   { offset += yyleng; strcpy(yylval.val, yytext); return LEQ; }
+"<"    { offset += yyleng; strcpy(yylval.val, yytext); return LEO; }
+">="   { offset += yyleng; strcpy(yylval.val, yytext); return GEQ; }
+">"    { offset += yyleng; strcpy(yylval.val, yytext); return GRE; }
 
-"="    { offset += yyleng; return '='; }
-"+="   { offset += yyleng; return APL; }
-"-="   { offset += yyleng; return AMI; }
-"/="   { offset += yyleng; return ADI; }
-"*="   { offset += yyleng; return AMU; }
+"="    { offset += yyleng; strcpy(yylval.val, yytext); return '='; }
+"+="   { offset += yyleng; strcpy(yylval.val, yytext); return APL; }
+"-="   { offset += yyleng; strcpy(yylval.val, yytext); return AMI; }
+"/="   { offset += yyleng; strcpy(yylval.val, yytext); return ADI; }
+"*="   { offset += yyleng; strcpy(yylval.val, yytext); return AMU; }
 
-"++"   { offset += yyleng; return UAD; }
-"--"   { offset += yyleng; return USU; }
+"++"   { offset += yyleng; strcpy(yylval.val, yytext); return UAD; }
+"--"   { offset += yyleng; strcpy(yylval.val, yytext); return USU; }
 
-"&"    { offset += yyleng; return '&'; }
-"!"    { offset += yyleng; return '!'; }
-"||"    { offset += yyleng; return OR; }
+"&"    { offset += yyleng; strcpy(yylval.val, yytext); return '&'; }
+"!"    { offset += yyleng; strcpy(yylval.val, yytext); return '!'; }
+"||"    { offset += yyleng; strcpy(yylval.val, yytext); return OR; }
 
-"+"    { offset += yyleng; return '+'; }
-"-"    { offset += yyleng; return '-'; }
-"*"    { offset += yyleng; return '*'; }
-"/"    { offset += yyleng; return '/'; }
-"%"    { offset += yyleng; return '%'; }
-"^"    { offset += yyleng; return '^'; }
+"+"    { offset += yyleng; strcpy(yylval.val, yytext); return '+'; }
+"-"    { offset += yyleng; strcpy(yylval.val, yytext); return '-'; }
+"*"    { offset += yyleng; strcpy(yylval.val, yytext); return '*'; }
+"/"    { offset += yyleng; strcpy(yylval.val, yytext); return '/'; }
+"%"    { offset += yyleng; strcpy(yylval.val, yytext); return '%'; }
+"^"    { offset += yyleng; strcpy(yylval.val, yytext); return '^'; }
 
-","    { offset += yyleng; return ','; }
-";"    { offset += yyleng; return ';'; }
-"."    { offset += yyleng; return '.'; }
+","    { offset += yyleng; strcpy(yylval.val, yytext); return ','; }
+";"    { offset += yyleng; strcpy(yylval.val, yytext); return ';'; }
+"."    { offset += yyleng; strcpy(yylval.val, yytext); return '.'; }
 
 \n      { offset = 1; }
 
@@ -87,7 +88,7 @@ transposed { offset += yyleng; return TRA; }
 
 [ \t]+  { offset += yyleng; }
 
-<<EOF>> { offset += yyleng; return EOF; }
+<<EOF>> { offset += yyleng; strcpy(yylval.val, yytext); return EOF; }
 
 .       { printf( "%d %d Lexical error: %s\n", yylineno, offset, yytext ); offset += yyleng; }
 

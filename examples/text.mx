@@ -1,0 +1,28 @@
+fun main(){
+	var a ;
+    var aa = 10;
+    a = 100;
+    var str = "Q";
+    while(a > 0){
+        while(aa > 9){
+            print(str);
+            aa--;
+        }
+        a--;
+    }
+    if(a == 0){
+    	print("error");
+    }
+    else if(a == 2){
+    	print("error");
+    }
+    else{
+    	print("OK!!!");
+    }
+    print(str);
+    if(a>2){
+    	print(str);
+    }
+    
+    return (0);
+}
